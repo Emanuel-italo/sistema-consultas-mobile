@@ -26,6 +26,14 @@ const medico1: Medico = {
   ativo: true,
 };
 
+const paciente1: Paciente = {
+  id: 1,
+  nome: "Carlos Andrade",
+  cpf: "123.456.789-00",
+  email: "carlos@email.com",
+  telefone: "(11) 98765-4321",
+};
+
 
 
 
