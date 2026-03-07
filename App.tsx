@@ -59,6 +59,17 @@ export default function App() {
       ...consulta,
       status: "confirmada",
     });
+
+
+
+  function confirmarConsulta() {
+  setConsulta({
+    ...consulta,
+    status: "confirmada",
+  });
+}
+
+
   }
   return (
     <View style={styles.container}>
