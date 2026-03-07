@@ -1,3 +1,7 @@
+import { Especialidade } from "./src/types/especialidade";
+import { Paciente } from "./src/types/paciente";
+import { Medico } from "./src/interfaces/medico";
+import { Consulta } from "./src/interfaces/consulta";
 import React, { useState } from "react";
 import { View, Text, StyleSheet, Button } from "react-native";
 type Consulta = {
