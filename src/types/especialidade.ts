@@ -1,5 +1,5 @@
-export type Especialidade = {
+export interface Especialidade {
   id: number;
   nome: string;
-  descricao?: string;
-};
+  descricao: string;
+}
