@@ -1,4 +1,4 @@
-import { Especialidade } from "../types/especialidade";
+import { Especialidade } from "../especialidade";
 export interface Medico {
   id: number;
   nome: string;
