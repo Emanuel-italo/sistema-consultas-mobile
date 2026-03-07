@@ -11,6 +11,16 @@ type Consulta = {
   data: string;
   status: "agendada" | "confirmada" | "cancelada" | "realizada";
 };
+
+const cardiologia: Especialidade = {
+  id: 1,
+  nome: "Cardiologia",
+  descricao: "Cuidados com o coração",
+};
+
+
+
+
 export default function App() {
   const [consulta, setConsulta] = useState<Consulta>({
     id: 1,
