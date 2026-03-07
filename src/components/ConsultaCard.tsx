@@ -1,5 +1,38 @@
-import { StyleSheet } from 'react-native';
+import React from 'react';
+import { View, Text, StyleSheet, Button } from 'react-native';
 
+// Aqui está o componente que o seu index.ts estava tentando encontrar!
+// Note que estamos usando "export function ConsultaCard" para bater com o seu index.ts
+export function ConsultaCard() {
+  return (
+    <View style={styles.card}>
+      <View style={styles.statusBadge}>
+        <Text style={{ fontWeight: 'bold' }}>AGENDADA</Text>
+      </View>
+
+      <View style={styles.secao}>
+        <Text style={styles.label}>Paciente</Text>
+        <Text style={styles.valor}>Nome do Paciente</Text>
+      </View>
+
+      <View style={styles.secao}>
+        <Text style={styles.label}>Médico</Text>
+        <Text style={styles.valor}>Nome do Médico</Text>
+      </View>
+
+      <View style={styles.acoes}>
+        <View style={styles.botaoContainer}>
+          <Button title="Confirmar" color="#28a745" onPress={() => {}} />
+        </View>
+        <View style={styles.botaoContainer}>
+          <Button title="Cancelar" color="#dc3545" onPress={() => {}} />
+        </View>
+      </View>
+    </View>
+  );
+}
+
+// Os seus estilos maravilhosos continuam aqui embaixo
 const styles = StyleSheet.create({
   card: {
     width: "90%",
@@ -21,15 +54,15 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     alignSelf: "flex-start",
     marginBottom: 10,
-    backgroundColor: "#e0e0e0", // Cor padrão (ex: para 'agendada')
+    backgroundColor: "#e0e0e0", 
   },
   statusConfirmada: {
-    backgroundColor: "#d4edda", // Fundo verde claro
+    backgroundColor: "#d4edda", 
     borderColor: "#c3e6cb",
     borderWidth: 1,
   },
   statusCancelada: {
-    backgroundColor: "#f8d7da", // Fundo vermelho claro
+    backgroundColor: "#f8d7da", 
     borderColor: "#f5c6cb",
     borderWidth: 1,
   },
@@ -71,7 +104,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginHorizontal: 5,
     borderRadius: 8,
-    overflow: "hidden", // Garante que o botão respeite o borderRadius no Android
+    overflow: "hidden", 
   },
   mensagem: {
     marginTop: 15,
