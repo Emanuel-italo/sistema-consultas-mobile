@@ -75,6 +75,9 @@ function formatarValor(valor: number): string {
     currency: "BRL",
   });
 }
+function formatarData(data: Date): string {
+  return data.toLocaleDateString("pt-BR");
+}
 
 
   }
