@@ -14,7 +14,6 @@ export default function ConsultaCard({
   onConfirmar,
   onCancelar,
 }: ConsultaCardProps) {
-
   function formatarValor(valor: number): string {
     return valor.toLocaleString("pt-BR", {
       style: "currency",
@@ -28,7 +27,6 @@ export default function ConsultaCard({
 
   return (
     <View style={styles.card}>
-
       <View
         style={[
           styles.statusBadge,
@@ -70,7 +68,6 @@ export default function ConsultaCard({
       </View>
 
       <View style={styles.acoes}>
-
         {consulta.status === "agendada" && (
           <>
             {onConfirmar && (
@@ -82,7 +79,6 @@ export default function ConsultaCard({
                 />
               </View>
             )}
-
             {onCancelar && (
               <View style={styles.botaoContainer}>
                 <Button
@@ -98,21 +94,17 @@ export default function ConsultaCard({
         {consulta.status === "confirmada" && (
           <View style={styles.mensagem}>
             <Text style={styles.mensagemTexto}>
-              ✓ Consulta confirmada com sucesso
+              ✓ Consulta confirmada com sucesso!
             </Text>
           </View>
         )}
 
         {consulta.status === "cancelada" && (
           <View style={styles.mensagemCancelada}>
-            <Text style={styles.mensagemTexto}>
-              ✗ Consulta cancelada
-            </Text>
+            <Text style={styles.mensagemTexto}>✗ Consulta cancelada</Text>
           </View>
         )}
-
       </View>
-
     </View>
   );
 }
