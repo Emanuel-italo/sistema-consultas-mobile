@@ -1,124 +1,118 @@
-import React from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
+import React from "react";
+import { View, Text, Button } from "react-native";
+import { Consulta } from "../interfaces/consulta";
+import { styles } from "../styles/consultaCard.styles";
 
-// Aqui está o componente que o seu index.ts estava tentando encontrar!
-// Note que estamos usando "export function ConsultaCard" para bater com o seu index.ts
-export function ConsultaCard() {
+type ConsultaCardProps = {
+  consulta: Consulta;
+  onConfirmar?: () => void;
+  onCancelar?: () => void;
+};
+
+export default function ConsultaCard({
+  consulta,
+  onConfirmar,
+  onCancelar,
+}: ConsultaCardProps) {
+
+  function formatarValor(valor: number): string {
+    return valor.toLocaleString("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    });
+  }
+
+  function formatarData(data: Date): string {
+    return data.toLocaleDateString("pt-BR");
+  }
+
   return (
     <View style={styles.card}>
-      <View style={styles.statusBadge}>
-        <Text style={{ fontWeight: 'bold' }}>AGENDADA</Text>
+
+      <View
+        style={[
+          styles.statusBadge,
+          consulta.status === "confirmada" && styles.statusConfirmada,
+          consulta.status === "cancelada" && styles.statusCancelada,
+        ]}
+      >
+        <Text style={styles.statusTexto}>
+          {consulta.status.toUpperCase()}
+        </Text>
       </View>
 
       <View style={styles.secao}>
-        <Text style={styles.label}>Paciente</Text>
-        <Text style={styles.valor}>Nome do Paciente</Text>
+        <Text style={styles.label}>👨‍⚕️ Médico</Text>
+        <Text style={styles.valor}>{consulta.medico.nome}</Text>
+        <Text style={styles.info}>CRM: {consulta.medico.crm}</Text>
+        <Text style={styles.info}>{consulta.medico.especialidade.nome}</Text>
       </View>
 
       <View style={styles.secao}>
-        <Text style={styles.label}>Médico</Text>
-        <Text style={styles.valor}>Nome do Médico</Text>
+        <Text style={styles.label}>👤 Paciente</Text>
+        <Text style={styles.valor}>{consulta.paciente.nome}</Text>
+        <Text style={styles.info}>CPF: {consulta.paciente.cpf}</Text>
+        <Text style={styles.info}>Email: {consulta.paciente.email}</Text>
+        {consulta.paciente.telefone && (
+          <Text style={styles.info}>Tel: {consulta.paciente.telefone}</Text>
+        )}
+      </View>
+
+      <View style={styles.secao}>
+        <Text style={styles.label}>📅 Dados da Consulta</Text>
+        <Text style={styles.valor}>Data: {formatarData(consulta.data)}</Text>
+        <Text style={styles.valor}>
+          Valor: {formatarValor(consulta.valor)}
+        </Text>
+        {consulta.observacoes && (
+          <Text style={styles.observacoes}>{consulta.observacoes}</Text>
+        )}
       </View>
 
       <View style={styles.acoes}>
-        <View style={styles.botaoContainer}>
-          <Button title="Confirmar" color="#28a745" onPress={() => {}} />
-        </View>
-        <View style={styles.botaoContainer}>
-          <Button title="Cancelar" color="#dc3545" onPress={() => {}} />
-        </View>
+
+        {consulta.status === "agendada" && (
+          <>
+            {onConfirmar && (
+              <View style={styles.botaoContainer}>
+                <Button
+                  title="Confirmar Consulta"
+                  onPress={onConfirmar}
+                  color="#4CAF50"
+                />
+              </View>
+            )}
+
+            {onCancelar && (
+              <View style={styles.botaoContainer}>
+                <Button
+                  title="Cancelar Consulta"
+                  onPress={onCancelar}
+                  color="#F44336"
+                />
+              </View>
+            )}
+          </>
+        )}
+
+        {consulta.status === "confirmada" && (
+          <View style={styles.mensagem}>
+            <Text style={styles.mensagemTexto}>
+              ✓ Consulta confirmada com sucesso
+            </Text>
+          </View>
+        )}
+
+        {consulta.status === "cancelada" && (
+          <View style={styles.mensagemCancelada}>
+            <Text style={styles.mensagemTexto}>
+              ✗ Consulta cancelada
+            </Text>
+          </View>
+        )}
+
       </View>
+
     </View>
   );
 }
-
-// Os seus estilos maravilhosos continuam aqui embaixo
-const styles = StyleSheet.create({
-  card: {
-    width: "90%",
-    backgroundColor: "#ffffff",
-    borderRadius: 12,
-    padding: 20,
-    marginVertical: 10,
-    // Sombra para iOS
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    // Sombra para Android
-    elevation: 3,
-  },
-  statusBadge: {
-    paddingVertical: 4,
-    paddingHorizontal: 12,
-    borderRadius: 15,
-    alignSelf: "flex-start",
-    marginBottom: 10,
-    backgroundColor: "#e0e0e0", 
-  },
-  statusConfirmada: {
-    backgroundColor: "#d4edda", 
-    borderColor: "#c3e6cb",
-    borderWidth: 1,
-  },
-  statusCancelada: {
-    backgroundColor: "#f8d7da", 
-    borderColor: "#f5c6cb",
-    borderWidth: 1,
-  },
-  secao: {
-    marginTop: 15,
-    borderTopWidth: 1,
-    borderTopColor: "#eeeeee",
-    paddingTop: 10,
-  },
-  label: {
-    fontSize: 14,
-    fontWeight: "bold",
-    color: "#555555",
-    marginTop: 5,
-  },
-  valor: {
-    fontSize: 16,
-    color: "#333333",
-    marginBottom: 5,
-  },
-  info: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginVertical: 4,
-  },
-  observacoes: {
-    fontSize: 14,
-    fontStyle: "italic",
-    color: "#666666",
-    marginTop: 8,
-  },
-  acoes: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    marginTop: 20,
-  },
-  botaoContainer: {
-    flex: 1,
-    marginHorizontal: 5,
-    borderRadius: 8,
-    overflow: "hidden", 
-  },
-  mensagem: {
-    marginTop: 15,
-    padding: 10,
-    backgroundColor: "#e2e3e5",
-    borderRadius: 8,
-  },
-  mensagemCancelada: {
-    backgroundColor: "#f8d7da",
-  },
-  mensagemTexto: {
-    textAlign: "center",
-    color: "#383d41",
-    fontSize: 14,
-    fontWeight: "500",
-  },
-});
