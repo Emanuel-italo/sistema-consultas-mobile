@@ -1,26 +1,31 @@
 import { StyleSheet } from "react-native";
+
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#79059C",
+    backgroundColor: "#1565C0",
+  },
+  containerConfirmado: {
+    backgroundColor: "#2E7D32",
+  },
+  containerCancelado: {
+    backgroundColor: "#C62828",
   },
   scrollContent: {
-    padding: 20,
-    paddingTop: 60,
+    padding: 24,
+    paddingTop: 50,
   },
   header: {
-    alignItems: "center",
-    marginBottom: 24,
+    marginBottom: 25,
   },
   titulo: {
-    fontSize: 28,
+    fontSize: 26,
     fontWeight: "bold",
-    color: "#fff",
-    marginBottom: 8,
+    color: "#FFFFFF",
   },
   subtitulo: {
-    fontSize: 18,
-    color: "#fff",
+    fontSize: 15,
+    color: "#FFFFFF",
     opacity: 0.9,
   },
 });
