@@ -1,7 +1,7 @@
 {
   "name": "sistema-consultas-mobile",
   "version": "1.0.0",
-  "main": "index.ts",
+  "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -9,6 +9,7 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "^3.0.1",
     "expo": "~55.0.3",
     "expo-status-bar": "~55.0.4",
     "react": "19.2.0",
