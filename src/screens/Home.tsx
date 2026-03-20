@@ -57,7 +57,8 @@ export default function Home() {
       const dados = await AsyncStorage.getItem(STORAGE_KEY);
 
       if (dados) {
-        const consultaObj = JSON.parse(dados);
+        // Correção: Garantindo que o TypeScript entenda o objeto parseado
+        const consultaObj = JSON.parse(dados) as Consulta;
         consultaObj.data = new Date(consultaObj.data);
         setConsulta(consultaObj);
       }
@@ -78,9 +79,10 @@ export default function Home() {
   }
 
   function confirmarConsulta() {
-    const nova = {
+    // Correção: Tipando explicitamente a constante como "Consulta"
+    const nova: Consulta = {
       ...consulta,
-      status: "confirmada" as const,
+      status: "confirmada",
     };
 
     setConsulta(nova);
@@ -88,9 +90,10 @@ export default function Home() {
   }
 
   function cancelarConsulta() {
-    const nova = {
+    // Correção: Tipando explicitamente a constante como "Consulta"
+    const nova: Consulta = {
       ...consulta,
-      status: "cancelada" as const,
+      status: "cancelada",
     };
 
     setConsulta(nova);

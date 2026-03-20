@@ -15,15 +15,16 @@ export default function ConsultaCard({
   onCancelar,
 }: ConsultaCardProps) {
 
+  // Correção: toLocaleString pode causar crash no Android com Hermes.
+  // Esta abordagem é 100% segura para React Native.
   function formatarValor(valor: number): string {
-    return valor.toLocaleString("pt-BR", {
-      style: "currency",
-      currency: "BRL",
-    });
+    return `R$ ${valor.toFixed(2).replace(".", ",")}`;
   }
 
   function formatarData(data: Date): string {
-    return data.toLocaleDateString("pt-BR");
+    // Tratativa de segurança caso a data venha como string do JSON
+    const dataObj = new Date(data);
+    return dataObj.toLocaleDateString("pt-BR");
   }
 
   return (
